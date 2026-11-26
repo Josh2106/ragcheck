@@ -1,0 +1,107 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ragcheck"
+version = "0.1.0"
+description = "Benchmark and regression-test RAG pipelines: chunkers, retrievers, metrics, LLM judges and a CI gate."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+authors = [{ name = "Joshua Kumar" }]
+keywords = ["rag", "retrieval", "llm", "evaluation", "benchmark", "bm25", "ragas"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Testing",
+    "Typing :: Typed",
+]
+dependencies = [
+    "pydantic>=2.6",
+    "numpy>=1.26",
+    "httpx>=0.27",
+    "typer>=0.12",
+    "rich>=13.7",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+tiktoken = ["tiktoken>=0.7"]
+sentence-transformers = ["sentence-transformers>=2.7"]
+dev = [
+    "pytest>=8",
+    "pytest-cov>=5",
+    "pytest-asyncio>=0.23",
+    "hypothesis>=6.100",
+    "respx>=0.21",
+    "ruff>=0.5",
+    "mypy>=1.10",
+    "types-PyYAML",
+    "build>=1.2",
+]
+docs = ["mkdocs-material>=9.5", "mkdocstrings[python]>=0.25"]
+
+[project.scripts]
+ragcheck = "ragcheck.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Josh2106/ragcheck"
+Repository = "https://github.com/Josh2106/ragcheck"
+Issues = "https://github.com/Josh2106/ragcheck/issues"
+Changelog = "https://github.com/Josh2106/ragcheck/blob/main/CHANGELOG.md"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ragcheck"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/ragcheck", "tests", "examples", "README.md", "LICENSE", "CHANGELOG.md"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "UP", "SIM", "RUF", "N", "C4", "PT", "PL", "TID", "ARG"]
+ignore = ["PLR0917", "PLR0913", "PLR2004", "PLR0912", "PLR0911", "PLC0415"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["ARG", "PLR0915", "PLR2004"]
+
+[tool.mypy]
+strict = true
+python_version = "3.11"
+files = ["src/ragcheck"]
+plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = ["tiktoken", "tiktoken.*", "sentence_transformers", "sentence_transformers.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.coverage.run]
+source = ["ragcheck"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+exclude_also = [
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+    "@overload",
+    '^\s*\.\.\.$',
+]
