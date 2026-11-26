@@ -1,0 +1,11 @@
+# Fully local with Ollama (https://ollama.com):  ollama pull llama3.1 && ollama pull nomic-embed-text
+name: ollama-local
+dataset: builtin:sample
+chunker: {type: recursive, chunk_size: 500, chunk_overlap: 50}
+embedder: {type: ollama, model: nomic-embed-text}   # uses http://localhost:11434/v1
+retriever: {type: hybrid}
+generator: {type: llm, provider: ollama, model: llama3.1}
+judge: {type: llm, provider: ollama, model: llama3.1}
+cache: .ragcheck_cache/cache.sqlite
+metrics: [recall@5, mrr, token_f1, faithfulness, answer_relevance, context_recall]
+output: results/ollama-local.json

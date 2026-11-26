@@ -1,0 +1,823 @@
+{
+  "name": "quickstart",
+  "ragcheck_version": "0.1.0",
+  "created_at": "2026-11-26T14:44:54+00:00",
+  "duration_s": 0.057468899998639245,
+  "dataset": "builtin:sample",
+  "config": {
+    "name": "quickstart",
+    "dataset": "builtin:sample",
+    "chunker": {
+      "type": "recursive",
+      "chunk_size": 400,
+      "chunk_overlap": 40
+    },
+    "embedder": {
+      "type": "hashing",
+      "dim": 1024
+    },
+    "retriever": {
+      "type": "hybrid",
+      "rrf_k": 60,
+      "fetch_k": 20
+    },
+    "reranker": null,
+    "generator": {
+      "type": "extractive"
+    },
+    "judge": {
+      "type": "deterministic"
+    },
+    "metrics": [
+      "recall@5",
+      "precision@5",
+      "mrr",
+      "ndcg@5",
+      "hit_rate@5",
+      "exact_match",
+      "token_f1",
+      "rouge_l",
+      "semantic_similarity",
+      "faithfulness",
+      "answer_relevance",
+      "context_precision",
+      "context_recall"
+    ],
+    "top_k": 5,
+    "concurrency": 8,
+    "cache": null,
+    "output": "results/quickstart.json",
+    "limit": null,
+    "grid": null
+  },
+  "metrics": [
+    "recall@5",
+    "precision@5",
+    "mrr",
+    "ndcg@5",
+    "hit_rate@5",
+    "exact_match",
+    "token_f1",
+    "rouge_l",
+    "semantic_similarity",
+    "faithfulness",
+    "answer_relevance",
+    "context_precision",
+    "context_recall"
+  ],
+  "rows": [
+    {
+      "case_id": "q01",
+      "question": "What port does the Larkspur server listen on by default?",
+      "ground_truth": "The server listens on port 7420 by default.",
+      "answer": "- `[server]` controls the listen address, port and TLS.",
+      "retrieved_doc_ids": [
+        "install",
+        "env-vars",
+        "troubleshooting",
+        "config-file"
+      ],
+      "relevant_doc_ids": [
+        "install"
+      ],
+      "scores": {
+        "recall@5": 1.0,
+        "precision@5": 0.2,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0,
+        "exact_match": 0.0,
+        "token_f1": 0.2857142857142857,
+        "rouge_l": 0.2857142857142857,
+        "semantic_similarity": 0.34448325634002686,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.33993532630673473,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "latency_ms": 0.920300000871066,
+      "error": null
+    },
+    {
+      "case_id": "q02",
+      "question": "Where does Larkspur look for its configuration file by default?",
+      "ground_truth": "By default it looks for the file at /etc/larkspur/larkspur.toml.",
+      "answer": "# Configuration file",
+      "retrieved_doc_ids": [
+        "config-file",
+        "env-vars",
+        "quickstart",
+        "tls",
+        "retries"
+      ],
+      "relevant_doc_ids": [
+        "config-file"
+      ],
+      "scores": {
+        "recall@5": 1.0,
+        "precision@5": 0.2,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0,
+        "exact_match": 0.0,
+        "token_f1": 0.2,
+        "rouge_l": 0.2,
+        "semantic_similarity": 0.10323462505546957,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.44721359959362156,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "latency_ms": 0.6737000003340654,
+      "error": null
+    },
+    {
+      "case_id": "q03",
+      "question": "How many times is a failed task attempted by default?",
+      "ground_truth": "A task is attempted up to 5 times in total by default.",
+      "answer": "By default a task is attempted up to 5 times in total (`max_attempts = 5`).",
+      "retrieved_doc_ids": [
+        "retries",
+        "timeouts",
+        "metrics",
+        "troubleshooting",
+        "webhooks"
+      ],
+      "relevant_doc_ids": [
+        "retries"
+      ],
+      "scores": {
+        "recall@5": 1.0,
+        "precision@5": 0.2,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0,
+        "exact_match": 0.0,
+        "token_f1": 0.9166666666666666,
+        "rouge_l": 0.7500000000000001,
+        "semantic_similarity": 0.9048948231276764,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.37197283938304604,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "latency_ms": 0.6470000007539056,
+      "error": null
+    },
+    {
+      "case_id": "q04",
+      "question": "What happens to a task after it exhausts all of its retry attempts?",
+      "ground_truth": "It is moved to the dead-letter queue named _dlq.",
+      "answer": "When a task exhausts all of its attempts it is moved to the dead-letter queue.",
+      "retrieved_doc_ids": [
+        "retries",
+        "timeouts",
+        "troubleshooting",
+        "quickstart"
+      ],
+      "relevant_doc_ids": [
+        "retries",
+        "dead-letter"
+      ],
+      "scores": {
+        "recall@5": 0.5,
+        "precision@5": 0.2,
+        "mrr": 1.0,
+        "ndcg@5": 0.6131471927654584,
+        "hit_rate@5": 1.0,
+        "exact_match": 0.0,
+        "token_f1": 0.5714285714285714,
+        "rouge_l": 0.5714285714285714,
+        "semantic_similarity": 0.5993094444274902,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.33855965758162965,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "latency_ms": 0.6797999958507717,
+      "error": null
+    },
+    {
+      "case_id": "q05",
+      "question": "How long are tasks kept in the dead-letter queue?",
+      "ground_truth": "Tasks are retained in the dead-letter queue for 14 days.",
+      "answer": "# Dead-letter queue",
+      "retrieved_doc_ids": [
+        "dead-letter",
+        "webhooks",
+        "workers",
+        "storage-backends"
+      ],
+      "relevant_doc_ids": [
+        "dead-letter"
+      ],
+      "scores": {
+        "recall@5": 1.0,
+        "precision@5": 0.2,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0,
+        "exact_match": 0.0,
+        "token_f1": 0.3636363636363636,
+        "rouge_l": 0.3636363636363636,
+        "semantic_similarity": 0.5510553060704105,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.5496614044795833,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "latency_ms": 0.5789999995613471,
+      "error": null
+    },
+    {
+      "case_id": "q06",
+      "question": "What is the default task timeout?",
+      "ground_truth": "The default task timeout is 300 seconds.",
+      "answer": "The default task timeout is 300 seconds (five minutes).",
+      "retrieved_doc_ids": [
+        "timeouts",
+        "troubleshooting",
+        "logging",
+        "priorities"
+      ],
+      "relevant_doc_ids": [
+        "timeouts"
+      ],
+      "scores": {
+        "recall@5": 1.0,
+        "precision@5": 0.2,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0,
+        "exact_match": 0.0,
+        "token_f1": 0.8571428571428571,
+        "rouge_l": 0.8571428571428571,
+        "semantic_similarity": 0.8764598965644836,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.47982967729646786,
+        "context_precision": 0.7555555555555555,
+        "context_recall": 1.0
+      },
+      "latency_ms": 0.5479000028572045,
+      "error": null
+    },
+    {
+      "case_id": "q07",
+      "question": "Which task priority value is the highest?",
+      "ground_truth": "9 is the highest priority.",
+      "answer": "Workers always lease the highest-priority task available on their queues.",
+      "retrieved_doc_ids": [
+        "priorities",
+        "troubleshooting",
+        "rest-api",
+        "webhooks",
+        "timeouts"
+      ],
+      "relevant_doc_ids": [
+        "priorities"
+      ],
+      "scores": {
+        "recall@5": 1.0,
+        "precision@5": 0.2,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "rouge_l": 0.0,
+        "semantic_similarity": 0.4128989719567845,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.34566644922185763,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "latency_ms": 0.5833000031998381,
+      "error": null
+    },
+    {
+      "case_id": "q08",
+      "question": "When is a worker considered dead?",
+      "ground_truth": "A worker that misses three consecutive heartbeats, 30 seconds with the default interval, is considered dead.",
+      "answer": "A worker that misses three consecutive heartbeats, which is 30 seconds with the default interval, is considered dead, and the tasks it had leased are returned to their queues.",
+      "retrieved_doc_ids": [
+        "workers",
+        "timeouts",
+        "retries",
+        "troubleshooting",
+        "webhooks"
+      ],
+      "relevant_doc_ids": [
+        "workers"
+      ],
+      "scores": {
+        "recall@5": 1.0,
+        "precision@5": 0.2,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0,
+        "exact_match": 0.0,
+        "token_f1": 0.7000000000000001,
+        "rouge_l": 0.7000000000000001,
+        "semantic_similarity": 0.78596031665802,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.33245618322052695,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "latency_ms": 0.553600002604071,
+      "error": null
+    },
+    {
+      "case_id": "q09",
+      "question": "Which PostgreSQL version does the postgres backend need?",
+      "ground_truth": "PostgreSQL 13 or newer.",
+      "answer": "When using the postgres backend, back up the database with the usual PostgreSQL tools such as `pg_dump`; `lark backup` is not needed.",
+      "retrieved_doc_ids": [
+        "backups",
+        "storage-backends",
+        "troubleshooting",
+        "install",
+        "config-file"
+      ],
+      "relevant_doc_ids": [
+        "storage-backends"
+      ],
+      "scores": {
+        "recall@5": 1.0,
+        "precision@5": 0.2,
+        "mrr": 0.5,
+        "ndcg@5": 0.6309297535714575,
+        "hit_rate@5": 1.0,
+        "exact_match": 0.0,
+        "token_f1": 0.08695652173913043,
+        "rouge_l": 0.08695652173913043,
+        "semantic_similarity": 0.11435149483102498,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.3669729554301002,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      },
+      "latency_ms": 0.5746000024373643,
+      "error": null
+    },
+    {
+      "case_id": "q10",
+      "question": "How many nodes are recommended for a Larkspur cluster?",
+      "ground_truth": "Three or five nodes are recommended.",
+      "answer": "Recommended for production and required for clustering with more than three nodes.",
+      "retrieved_doc_ids": [
+        "clustering",
+        "storage-backends",
+        "config-file",
+        "rate-limiting"
+      ],
+      "relevant_doc_ids": [
+        "clustering"
+      ],
+      "scores": {
+        "recall@5": 1.0,
+        "precision@5": 0.2,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0,
+        "exact_match": 0.0,
+        "token_f1": 0.3333333333333333,
+        "rouge_l": 0.2222222222222222,
+        "semantic_similarity": 0.3575992116450324,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.2985444143510899,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "latency_ms": 0.570500000321772,
+      "error": null
+    },
+    {
+      "case_id": "q11",
+      "question": "Which header carries the webhook signature?",
+      "ground_truth": "The signature is sent in the X-Larkspur-Signature header.",
+      "answer": "The signature is sent in the `X-Larkspur-Signature` header; verify it before trusting the payload.",
+      "retrieved_doc_ids": [
+        "webhooks",
+        "troubleshooting",
+        "workers",
+        "idempotency",
+        "dead-letter"
+      ],
+      "relevant_doc_ids": [
+        "webhooks"
+      ],
+      "scores": {
+        "recall@5": 1.0,
+        "precision@5": 0.2,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0,
+        "exact_match": 0.0,
+        "token_f1": 0.7058823529411764,
+        "rouge_l": 0.7058823529411764,
+        "semantic_similarity": 0.8666936159133911,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.35272149208509723,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "latency_ms": 0.563900000997819,
+      "error": null
+    },
+    {
+      "case_id": "q12",
+      "question": "On which port are the Prometheus metrics exposed?",
+      "ground_truth": "Prometheus metrics are exposed at /metrics on port 9464.",
+      "answer": "Larkspur exposes Prometheus metrics at the `/metrics` endpoint on port 9464.",
+      "retrieved_doc_ids": [
+        "metrics",
+        "dead-letter",
+        "install",
+        "workers",
+        "idempotency"
+      ],
+      "relevant_doc_ids": [
+        "metrics"
+      ],
+      "scores": {
+        "recall@5": 1.0,
+        "precision@5": 0.2,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0,
+        "exact_match": 0.0,
+        "token_f1": 0.7368421052631577,
+        "rouge_l": 0.7368421052631577,
+        "semantic_similarity": 0.7124959230422974,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.4604044606960971,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "latency_ms": 0.5571000001509674,
+      "error": null
+    },
+    {
+      "case_id": "q13",
+      "question": "How do I install the Python SDK?",
+      "ground_truth": "Install it with pip install larkspur-client.",
+      "answer": "# Python SDK",
+      "retrieved_doc_ids": [
+        "python-sdk",
+        "idempotency",
+        "release-2-3",
+        "js-sdk",
+        "install"
+      ],
+      "relevant_doc_ids": [
+        "python-sdk"
+      ],
+      "scores": {
+        "recall@5": 1.0,
+        "precision@5": 0.2,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "rouge_l": 0.0,
+        "semantic_similarity": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.5286805326376811,
+        "context_precision": 0.75,
+        "context_recall": 1.0
+      },
+      "latency_ms": 0.556200000573881,
+      "error": null
+    },
+    {
+      "case_id": "q14",
+      "question": "What is the maximum task payload size?",
+      "ground_truth": "The maximum task payload size is 1 MiB.",
+      "answer": "The maximum page size is 500 items.",
+      "retrieved_doc_ids": [
+        "limits",
+        "webhooks",
+        "rest-api",
+        "troubleshooting",
+        "priorities"
+      ],
+      "relevant_doc_ids": [
+        "limits"
+      ],
+      "scores": {
+        "recall@5": 1.0,
+        "precision@5": 0.2,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0,
+        "exact_match": 0.0,
+        "token_f1": 0.4615384615384615,
+        "rouge_l": 0.4615384615384615,
+        "semantic_similarity": 0.5129224061965942,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.32467887065389295,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "latency_ms": 0.5631000021821819,
+      "error": null
+    },
+    {
+      "case_id": "q15",
+      "question": "How long is the idempotency deduplication window?",
+      "ground_truth": "The deduplication window is 24 hours.",
+      "answer": "The deduplication window is 24 hours.",
+      "retrieved_doc_ids": [
+        "idempotency",
+        "js-sdk",
+        "backups",
+        "webhooks",
+        "tls"
+      ],
+      "relevant_doc_ids": [
+        "idempotency"
+      ],
+      "scores": {
+        "recall@5": 1.0,
+        "precision@5": 0.2,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0,
+        "exact_match": 1.0,
+        "token_f1": 1.0,
+        "rouge_l": 1.0,
+        "semantic_similarity": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.4122424289477238,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "latency_ms": 0.49140000191982836,
+      "error": null
+    },
+    {
+      "case_id": "q16",
+      "question": "What is the minimum supported TLS version?",
+      "ground_truth": "The minimum supported version is TLS 1.2.",
+      "answer": "The minimum supported version is TLS 1.2; TLS 1.3 is preferred when the client supports it.",
+      "retrieved_doc_ids": [
+        "tls",
+        "troubleshooting",
+        "webhooks",
+        "upgrading",
+        "logging"
+      ],
+      "relevant_doc_ids": [
+        "tls"
+      ],
+      "scores": {
+        "recall@5": 1.0,
+        "precision@5": 0.2,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0,
+        "exact_match": 0.0,
+        "token_f1": 0.6,
+        "rouge_l": 0.6,
+        "semantic_similarity": 0.814824797490215,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.4672094544850741,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "latency_ms": 0.5206999994697981,
+      "error": null
+    },
+    {
+      "case_id": "q17",
+      "question": "Which roles can API tokens have?",
+      "ground_truth": "The built-in roles are viewer, operator and admin.",
+      "answer": "# Authentication and roles",
+      "retrieved_doc_ids": [
+        "auth-rbac",
+        "rest-api",
+        "release-2-0",
+        "troubleshooting"
+      ],
+      "relevant_doc_ids": [
+        "auth-rbac"
+      ],
+      "scores": {
+        "recall@5": 1.0,
+        "precision@5": 0.2,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0,
+        "exact_match": 0.0,
+        "token_f1": 0.4,
+        "rouge_l": 0.2,
+        "semantic_similarity": 0.30674993991851807,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.23434814603318405,
+        "context_precision": 0.75,
+        "context_recall": 1.0
+      },
+      "latency_ms": 0.5495000004884787,
+      "error": null
+    },
+    {
+      "case_id": "q18",
+      "question": "What is required to upgrade from 1.x to 2.x?",
+      "ground_truth": "It requires downtime and running lark migrate before starting the new version.",
+      "answer": "Upgrading from 1.x to 2.x is a major upgrade.",
+      "retrieved_doc_ids": [
+        "upgrading",
+        "release-2-0",
+        "retries",
+        "quickstart",
+        "tls"
+      ],
+      "relevant_doc_ids": [
+        "upgrading",
+        "release-2-0"
+      ],
+      "scores": {
+        "recall@5": 1.0,
+        "precision@5": 0.4,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "rouge_l": 0.0,
+        "semantic_similarity": 0.019684938024576784,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.5469940381202186,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "latency_ms": 0.5674999993061647,
+      "error": null
+    },
+    {
+      "case_id": "q19",
+      "question": "Which time zone do cron schedules use by default?",
+      "ground_truth": "Cron schedules are evaluated in UTC by default.",
+      "answer": "Cron schedules are evaluated in UTC by default.",
+      "retrieved_doc_ids": [
+        "scheduling",
+        "troubleshooting",
+        "retries"
+      ],
+      "relevant_doc_ids": [
+        "scheduling"
+      ],
+      "scores": {
+        "recall@5": 1.0,
+        "precision@5": 0.2,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0,
+        "exact_match": 1.0,
+        "token_f1": 1.0,
+        "rouge_l": 1.0,
+        "semantic_similarity": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.4370214234633226,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "latency_ms": 0.5576999974437058,
+      "error": null
+    },
+    {
+      "case_id": "q20",
+      "question": "Which API was removed in Larkspur 2.0?",
+      "ground_truth": "The XML-RPC API was removed.",
+      "answer": "# Larkspur 2.0 release notes",
+      "retrieved_doc_ids": [
+        "release-2-0",
+        "env-vars",
+        "install",
+        "release-2-3"
+      ],
+      "relevant_doc_ids": [
+        "release-2-0"
+      ],
+      "scores": {
+        "recall@5": 1.0,
+        "precision@5": 0.2,
+        "mrr": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@5": 1.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "rouge_l": 0.0,
+        "semantic_similarity": 0.05671783164143562,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.4388565924030904,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "latency_ms": 0.7028999971225858,
+      "error": null
+    }
+  ],
+  "aggregates": {
+    "recall@5": {
+      "mean": 0.975,
+      "std": 0.10897247358851683,
+      "min": 0.5,
+      "max": 1.0,
+      "count": 20
+    },
+    "precision@5": {
+      "mean": 0.21000000000000002,
+      "std": 0.04358898943540674,
+      "min": 0.2,
+      "max": 0.4,
+      "count": 20
+    },
+    "mrr": {
+      "mean": 0.975,
+      "std": 0.10897247358851683,
+      "min": 0.5,
+      "max": 1.0,
+      "count": 20
+    },
+    "ndcg@5": {
+      "mean": 0.9622038473168457,
+      "std": 0.113423312883883,
+      "min": 0.6131471927654584,
+      "max": 1.0,
+      "count": 20
+    },
+    "hit_rate@5": {
+      "mean": 1.0,
+      "std": 0.0,
+      "min": 1.0,
+      "max": 1.0,
+      "count": 20
+    },
+    "exact_match": {
+      "mean": 0.1,
+      "std": 0.3,
+      "min": 0.0,
+      "max": 1.0,
+      "count": 20
+    },
+    "token_f1": {
+      "mean": 0.46095707597020025,
+      "std": 0.33827757030280936,
+      "min": 0.0,
+      "max": 1.0,
+      "count": 20
+    },
+    "rouge_l": {
+      "mean": 0.43706818708131134,
+      "std": 0.3360196893880619,
+      "min": 0.0,
+      "max": 1.0,
+      "count": 20
+    },
+    "semantic_similarity": {
+      "mean": 0.5170168399451723,
+      "std": 0.33509385872494746,
+      "min": 0.0,
+      "max": 1.0,
+      "count": 20
+    },
+    "faithfulness": {
+      "mean": 1.0,
+      "std": 0.0,
+      "min": 1.0,
+      "max": 1.0,
+      "count": 20
+    },
+    "answer_relevance": {
+      "mean": 0.403698497319502,
+      "std": 0.08441104375605063,
+      "min": 0.23434814603318405,
+      "max": 0.5496614044795833,
+      "count": 20
+    },
+    "context_precision": {
+      "mean": 0.9127777777777778,
+      "std": 0.22722222222222221,
+      "min": 0.0,
+      "max": 1.0,
+      "count": 20
+    },
+    "context_recall": {
+      "mean": 0.95,
+      "std": 0.21794494717703367,
+      "min": 0.0,
+      "max": 1.0,
+      "count": 20
+    }
+  },
+  "stats": {
+    "index_s": 0.025374199998623226,
+    "cases": 20.0,
+    "latency_ms_mean": 0.5979850004223408,
+    "latency_ms_p95": 0.7137699973100099,
+    "errors": 0.0
+  }
+}

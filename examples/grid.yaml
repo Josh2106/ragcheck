@@ -1,0 +1,22 @@
+# Sweep chunk sizes x retrievers on the bundled sample corpus:
+#   ragcheck grid examples/grid.yaml --markdown results/grid.md
+name: grid
+dataset: builtin:sample
+chunker:
+  type: recursive
+  chunk_overlap: 0
+embedder:
+  type: hashing
+  dim: 1024
+generator:
+  type: extractive
+judge:
+  type: deterministic
+top_k: 5
+metrics: [recall@1, recall@5, mrr, ndcg@5, token_f1, faithfulness, context_recall]
+grid:
+  chunk_sizes: [200, 400, 800]
+  retrievers:
+    - {type: bm25}
+    - {type: dense}
+    - {type: hybrid}

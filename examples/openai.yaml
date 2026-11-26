@@ -1,0 +1,22 @@
+# Real providers (needs network + keys). Every LLM/embedding call is cached on disk,
+# so re-running an unchanged config is free.
+#   export OPENAI_API_KEY=...   ragcheck run examples/openai.yaml
+name: openai-hybrid
+dataset: builtin:sample
+chunker: {type: markdown, max_chunk_size: 800}
+embedder:
+  type: openai                         # any OpenAI-compatible /embeddings endpoint
+  model: text-embedding-3-small
+retriever: {type: hybrid}
+generator:
+  type: llm
+  provider: openai                     # openai | anthropic | groq | ollama
+  model: gpt-4o-mini
+judge:
+  type: llm
+  provider: openai
+  model: gpt-4o-mini
+cache: .ragcheck_cache/cache.sqlite
+metrics: [recall@5, mrr, ndcg@5, token_f1, semantic_similarity,
+          faithfulness, answer_relevance, context_precision, context_recall]
+output: results/openai-hybrid.json

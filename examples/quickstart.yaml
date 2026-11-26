@@ -1,0 +1,36 @@
+# Offline quickstart: hashing embedder + extractive generator + deterministic judge.
+# Runs in a few seconds with no API keys:  ragcheck run examples/quickstart.yaml
+name: quickstart
+dataset: builtin:sample        # synthetic docs for "Larkspur", a fictional task queue
+chunker:
+  type: recursive
+  chunk_size: 400
+  chunk_overlap: 40
+embedder:
+  type: hashing
+  dim: 1024
+retriever:
+  type: hybrid                 # BM25 + dense, fused with reciprocal rank fusion
+  rrf_k: 60
+  fetch_k: 20
+generator:
+  type: extractive
+judge:
+  type: deterministic
+top_k: 5
+concurrency: 8
+metrics:
+  - recall@5
+  - precision@5
+  - mrr
+  - ndcg@5
+  - hit_rate@5
+  - exact_match
+  - token_f1
+  - rouge_l
+  - semantic_similarity
+  - faithfulness
+  - answer_relevance
+  - context_precision
+  - context_recall
+output: results/quickstart.json
