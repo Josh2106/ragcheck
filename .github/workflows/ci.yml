@@ -1,0 +1,91 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -e ".[dev]"
+      - name: ruff
+        run: |
+          ruff check src tests
+          ruff format --check src tests
+      - name: mypy --strict
+        run: mypy
+
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python-version: ["3.11", "3.12"]
+        include:
+          - os: windows-latest
+            python-version: "3.12"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - run: python -m pip install -e ".[dev]"
+      - name: pytest
+        run: pytest --cov=ragcheck --cov-report=term-missing --cov-report=xml --cov-fail-under=90
+      - name: quickstart (offline, no API keys)
+        run: ragcheck run examples/quickstart.yaml --no-progress -o results/quickstart.json
+
+  build:
+    needs: [lint, test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install build
+      - run: python -m build
+      - name: smoke-test the wheel in a clean venv
+        run: |
+          python -m venv /tmp/smoke
+          /tmp/smoke/bin/pip install dist/*.whl
+          /tmp/smoke/bin/ragcheck --help
+          /tmp/smoke/bin/ragcheck run examples/quickstart.yaml --no-progress -o /tmp/r.json
+          /tmp/smoke/bin/ragcheck compare /tmp/r.json /tmp/r.json --fail-on "recall@5<-0.02"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  # Example of the regression gate a downstream project would run on every PR.
+  regression-gate:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -e .
+      - run: ragcheck run examples/quickstart.yaml --no-progress -o results/current.json
+      - name: compare against the committed baseline
+        run: >
+          ragcheck compare examples/baseline.json results/current.json
+          --fail-on "recall@5<-0.02" --fail-on "ndcg@5<-0.02" --fail-on "token_f1<-5%"
