@@ -1,0 +1,20 @@
+{"id": "q01", "question": "What port does the Larkspur server listen on by default?", "answer": "The server listens on port 7420 by default.", "relevant_doc_ids": ["install"]}
+{"id": "q02", "question": "Where does Larkspur look for its configuration file by default?", "answer": "By default it looks for the file at /etc/larkspur/larkspur.toml.", "relevant_doc_ids": ["config-file"]}
+{"id": "q03", "question": "How many times is a failed task attempted by default?", "answer": "A task is attempted up to 5 times in total by default.", "relevant_doc_ids": ["retries"]}
+{"id": "q04", "question": "What happens to a task after it exhausts all of its retry attempts?", "answer": "It is moved to the dead-letter queue named _dlq.", "relevant_doc_ids": ["retries", "dead-letter"]}
+{"id": "q05", "question": "How long are tasks kept in the dead-letter queue?", "answer": "Tasks are retained in the dead-letter queue for 14 days.", "relevant_doc_ids": ["dead-letter"]}
+{"id": "q06", "question": "What is the default task timeout?", "answer": "The default task timeout is 300 seconds.", "relevant_doc_ids": ["timeouts"]}
+{"id": "q07", "question": "Which task priority value is the highest?", "answer": "9 is the highest priority.", "relevant_doc_ids": ["priorities"]}
+{"id": "q08", "question": "When is a worker considered dead?", "answer": "A worker that misses three consecutive heartbeats, 30 seconds with the default interval, is considered dead.", "relevant_doc_ids": ["workers"]}
+{"id": "q09", "question": "Which PostgreSQL version does the postgres backend need?", "answer": "PostgreSQL 13 or newer.", "relevant_doc_ids": ["storage-backends"]}
+{"id": "q10", "question": "How many nodes are recommended for a Larkspur cluster?", "answer": "Three or five nodes are recommended.", "relevant_doc_ids": ["clustering"]}
+{"id": "q11", "question": "Which header carries the webhook signature?", "answer": "The signature is sent in the X-Larkspur-Signature header.", "relevant_doc_ids": ["webhooks"]}
+{"id": "q12", "question": "On which port are the Prometheus metrics exposed?", "answer": "Prometheus metrics are exposed at /metrics on port 9464.", "relevant_doc_ids": ["metrics"]}
+{"id": "q13", "question": "How do I install the Python SDK?", "answer": "Install it with pip install larkspur-client.", "relevant_doc_ids": ["python-sdk"]}
+{"id": "q14", "question": "What is the maximum task payload size?", "answer": "The maximum task payload size is 1 MiB.", "relevant_doc_ids": ["limits"]}
+{"id": "q15", "question": "How long is the idempotency deduplication window?", "answer": "The deduplication window is 24 hours.", "relevant_doc_ids": ["idempotency"]}
+{"id": "q16", "question": "What is the minimum supported TLS version?", "answer": "The minimum supported version is TLS 1.2.", "relevant_doc_ids": ["tls"]}
+{"id": "q17", "question": "Which roles can API tokens have?", "answer": "The built-in roles are viewer, operator and admin.", "relevant_doc_ids": ["auth-rbac"]}
+{"id": "q18", "question": "What is required to upgrade from 1.x to 2.x?", "answer": "It requires downtime and running lark migrate before starting the new version.", "relevant_doc_ids": ["upgrading", "release-2-0"]}
+{"id": "q19", "question": "Which time zone do cron schedules use by default?", "answer": "Cron schedules are evaluated in UTC by default.", "relevant_doc_ids": ["scheduling"]}
+{"id": "q20", "question": "Which API was removed in Larkspur 2.0?", "answer": "The XML-RPC API was removed.", "relevant_doc_ids": ["release-2-0"]}
